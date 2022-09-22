@@ -1,0 +1,4 @@
+selenium-recaptcha
+selenium-wire
+Flask
+waitress
