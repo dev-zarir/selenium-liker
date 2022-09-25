@@ -63,7 +63,7 @@ def Liker_Engine(react, post_id, cookie):
 		solver.solve_recaptcha()
 	except Exception as e:
 		if 'google blocking the captcha' in str(e):
-			driver.save_screenshot('err.png')
+			driver.save_screenshot('static/err.png')
 		driver.close()
 		return {'success':False, 'msg':f'Could not solve Captcha! Error: {e}'}
 
