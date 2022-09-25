@@ -1,3 +1,4 @@
+from pickletools import string1
 from selenium_recaptcha.components import find_until_located, find_until_clicklable
 from selenium_recaptcha import Recaptcha_Solver
 from selenium.webdriver.common.by import By
@@ -61,7 +62,7 @@ def Liker_Engine(react, post_id, cookie):
 		solver=Recaptcha_Solver(driver, './ffmpeg')
 		solver.solve_recaptcha()
 	except Exception as e:
-		if 'google blocking the captcha' in e:
+		if 'google blocking the captcha' in str(e):
 			driver.save_screenshot('static/err.png')
 		driver.close()
 		return {'success':False, 'msg':f'Could not solve Captcha! Error: {e}'}
