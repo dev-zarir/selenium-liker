@@ -1,6 +1,7 @@
 from selenium_recaptcha.components import find_until_located, find_until_clicklable
 from selenium_recaptcha import Recaptcha_Solver
 from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
 from urllib.parse import quote_plus
 from seleniumwire import webdriver
 from time import sleep
@@ -32,7 +33,7 @@ def Liker_Engine(react, post_id, cookie):
 	if os.environ.get('HEROKU') == 'True':
 		options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 
-	driver = webdriver.Chrome(executable_path = 'chromedriver' if os.environ.get('HEROKU') != 'True' else os.environ.get("CHROMEDRIVER_PATH"), chrome_options=options)
+	driver = webdriver.Chrome(executable_path = ChromeDriverManager().install(), chrome_options=options)
 	driver.set_window_size(400,700)
 	driver.request_interceptor = interceptor
 
@@ -57,9 +58,11 @@ def Liker_Engine(react, post_id, cookie):
 		return {'success':False, 'msg':f'Remaining Time {minutes} minutes {seconds} seconds.'}
 
 	try:
-		solver=Recaptcha_Solver(driver)
+		solver=Recaptcha_Solver(driver, './ffmpeg')
 		solver.solve_recaptcha()
 	except Exception as e:
+		if 'google blocking the captcha' in e:
+			driver.save_screenshot('static/err.png')
 		driver.close()
 		return {'success':False, 'msg':f'Could not solve Captcha! Error: {e}'}
 
