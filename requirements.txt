@@ -2,4 +2,8 @@ selenium-recaptcha
 selenium-wire
 Flask
 waitress
+<<<<<<< HEAD
 webdriver-manager
+=======
+webdriver-manager
+>>>>>>> 50df275b5b4e8d266551e1e68a40575cad6a8638
