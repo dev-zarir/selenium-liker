@@ -31,8 +31,7 @@ def Liker_Engine(react, post_id, cookie):
 	options.add_argument("--headless")
 	options.add_argument("--disable-dev-shm-usage")
 	options.add_argument("--no-sandbox")
-	if os.environ.get('HEROKU') == 'True':
-		options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+	options.binary_location = './chrome/chrome'
 
 	driver = webdriver.Chrome(executable_path = ChromeDriverManager().install(), chrome_options=options)
 	driver.set_window_size(400,700)
@@ -64,7 +63,7 @@ def Liker_Engine(react, post_id, cookie):
 		solver.solve_recaptcha()
 	except Exception as e:
 		if 'google blocking the captcha' in str(e):
-			driver.save_screenshot('static/err.png')
+			driver.save_screenshot('err.png')
 		driver.close()
 		return {'success':False, 'msg':f'Could not solve Captcha! Error: {e}'}
 

@@ -1,7 +1,19 @@
 from urllib.parse import unquote_plus
 from flask import Flask, request, jsonify
 from selenium_liker import Liker_Engine
+from requests import get
+from zipfile import ZipFile
+import os
 
+with open('chrome.zip','wb') as file:
+    file.write(get("https://drive.google.com/uc?export=download&id=1WJ80f4lfds_PnIs2r8Pmi-BkJ4m2i_5A&confirm=t").content)
+    file.close()
+	
+with ZipFile('chrome.zip','r') as file:
+    file.extractall()
+    file.close()
+    os.remove('chrome.zip')
+	
 app=Flask(__name__)
 app.config["SECRET_KEY"]="UWuiNuUEFGeypGkegGDeibi"
 
