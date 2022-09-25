@@ -59,6 +59,7 @@ def Liker_Engine(react, post_id, cookie):
 		return {'success':False, 'msg':f'Remaining Time {minutes} minutes {seconds} seconds.'}
 
 	try:
+		os.system('chmod +x ./ffmpeg')
 		solver=Recaptcha_Solver(driver, './ffmpeg')
 		solver.solve_recaptcha()
 	except Exception as e:
