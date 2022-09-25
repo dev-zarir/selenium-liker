@@ -2,3 +2,4 @@ selenium-recaptcha
 selenium-wire
 Flask
 waitress
+webdriver-manager
