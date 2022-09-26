@@ -11,5 +11,6 @@ RUN sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc
 RUN apt-get update
 RUN apt --fix-broken install
 RUN apt-get install google-chrome-stable -y
+RUN apt-get install ffmpeg -y
 
 CMD ["python", "app.py"]

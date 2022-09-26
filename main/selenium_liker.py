@@ -56,12 +56,9 @@ def Liker_Engine(react, post_id, cookie):
 		return {'success':False, 'msg':f'Remaining Time {minutes} minutes {seconds} seconds.'}
 
 	try:
-		os.system('chmod +x ./ffmpeg')
-		solver=Recaptcha_Solver(driver, './ffmpeg')
+		solver=Recaptcha_Solver(driver)
 		solver.solve_recaptcha()
 	except Exception as e:
-		if 'google blocking the captcha' in str(e):
-			driver.save_screenshot('static/err.png')
 		driver.close()
 		return {'success':False, 'msg':f'Could not solve Captcha! Error: {e}'}
 
