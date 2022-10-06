@@ -13,7 +13,7 @@ app.config["SECRET_KEY"] = "UWuiNuUEFGeypGkegGDeibi"
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    return """<title>Selenium Auto Liker</title><form method="POST" action="/send"><input name="react" placeholder="React Name"/><input name="post_id" placeholder="Post ID"/><input name="cookie" placeholder="FB Cookie"/><input type="submit"/></form>"""
+    return """<title>Selenium Auto Liker V1.2</title><form method="POST" action="/send"><input name="react" placeholder="React Name"/><input name="post_id" placeholder="Post ID"/><input name="cookie" placeholder="FB Cookie"/><input type="submit"/></form>"""
 
 
 @app.route('/send', methods=['GET', 'POST'])
