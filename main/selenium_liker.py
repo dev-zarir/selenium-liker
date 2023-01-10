@@ -1,7 +1,7 @@
 from selenium_recaptcha.components import find_until_located, find_until_clicklable
 from selenium_recaptcha import Recaptcha_Solver
-from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
 from urllib.parse import quote_plus
 from seleniumwire import webdriver
 from time import sleep
@@ -31,7 +31,7 @@ def Liker_Engine(react, post_id, cookie):
 	options.add_argument("--disable-dev-shm-usage")
 	options.add_argument("--no-sandbox")
 
-	driver = webdriver.Chrome(executable_path = ChromeDriverManager().install(), chrome_options=options)
+	driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), chrome_options=options)
 	driver.set_window_size(400,700)
 	driver.request_interceptor = interceptor
 
@@ -43,7 +43,6 @@ def Liker_Engine(react, post_id, cookie):
 
 	driver.get('http://app.pagalworld2.com/dashboard.php?type=custom')
 	sleep(1)
-
 	try:
 		driver.execute_script("document.querySelector('.panel').scrollIntoView(true);")
 		sleep(1)
@@ -56,8 +55,7 @@ def Liker_Engine(react, post_id, cookie):
 		return {'success':False, 'msg':f'Remaining Time {minutes} minutes {seconds} seconds.'}
 
 	try:
-		os.system('chmod +x ./ffmpeg')
-		solver=Recaptcha_Solver(driver, './ffmpeg')
+		solver=Recaptcha_Solver(driver)
 		solver.solve_recaptcha()
 	except Exception as e:
 		driver.close()
@@ -79,12 +77,3 @@ def Liker_Engine(react, post_id, cookie):
 
 	driver.close()
 	return {'success': True, 'msg':f'{sent_react} {react} Reacts Sent Successfully.', 'react':sent_react}
-
-# react='LOVE'
-# id='177933481414144'
-# cookie="datr=KoosY2liq1tgGfXRfcXjJYPf; sb=KoosYxFqwOdPE45pa34whxiQ; m_pixel_ratio=2; x-referer=eyJyIjoiL2Jvb2ttYXJrcy8%2FcGFpcHY9MCZlYXY9QWZhMXEtN2lnWmpHM3A4cXRBSmxJc0JXZHk2OGMyc1pZVG91akQwRlFpck44dlhyOUZnai1oTnNIV3owV2hFWDUyTSIsImgiOiIvYm9va21hcmtzLz9wYWlwdj0wJmVhdj1BZmExcS03aWdaakczcDhxdEFKbElzQldkeTY4YzJzWllUb3VqRDBGUWlyTjh2WHI5RmdqLWhOc0hXejBXaEVYNTJNIiwicyI6Im0ifQ%3D%3D; locale=en_US; fr=02UFdtCuENnDlUQ0A.AWXZx88jnfrHNK2pANhlw5Z7Ia0.BjLIoq.zT.AAA.0.0.BjLYTz.AWXT_7mwQQs; c_user=100085420164519; xs=7%3AbP5hC2QaKJoFeA%3A2%3A1663927540%3A-1%3A-1; m_page_voice=100085420164519; wd=360x453"
-
-# engine=Liker_Engine(react, id, cookie)
-
-# for i in engine:
-# 	print(i,':',engine[i])
